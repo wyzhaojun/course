@@ -60,3 +60,51 @@ git branch -d master
 删除远程分支
 
 git push origin --delete master
+
+
+
+# 本地代码上传到github
+
+2.1 在本地的项目工程目录下，安装shift，鼠标右键，git bash here，然后依次执行命令：
+
+    1.git init       //工作空间创建.git文件夹（默认隐藏了该文件夹）
+    2.git add .      //添加到暂存区
+    3.git commit -m "注释"
+    4.git remote add origin http://xxxxxxxxx.git   //本地仓库和远程github关联
+    5.git pull --rebase origin main    //远程有readme.md，拉一下
+    6.git push -u origin main        //代码合并
+
+2.2 在2020年10月1起，github默认主分支从master更名为main，以上提交方式会默认创建一个master分支，为保持一致性，可将本地git init的时候默认分支修改为main，执行：
+
+    git --version    查看版本
+    git config --global init.defaultBranch main   git在2.28.0上，重新设置git默认分支为main
+
+2.3 如果=一不小心，创建了mster分支，强迫症，可以执行下面命令删除分支。
+
+    删除本地分支：git branch -d 分支名称
+    强制删除本地分支：git branch -D 分支名称
+    删除远程分支：git push origin --delete 分支名称
+
+ 
+
+----------------------------------------------------------分  隔  线--------------------------------------------------
+
+附：
+
+1.拉代码时候出现：
+
+No tracked branch configured for branch new_protocal or the branch doesn't exist. 
+To make your branch track a remote branch call, for example, git branch --set-upstream-to=origin/new_protocal new_protocal
+执行：
+
+git branch --set-upstream-to=origin/main main
+
+ 
+
+2.电脑使用vpn时，用 git 提交代码至Github，结果报错，报错：
+
+OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to github.com:443
+
+可在项目根目录执行：
+
+git config --global --unset http.proxy
